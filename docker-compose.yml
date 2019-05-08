@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  celery:
+    working_dir: /app
+    build: ./celery_package
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+  redis:
+    image: redis
+  storage1:
+    image: ubuntu
+  storage2:
+    image: ubuntu
