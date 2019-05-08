@@ -3,14 +3,24 @@ version: '3'
 services:
   celery:
     working_dir: /app
-    build: ./celery_package
+    build:
+      context: .
+      dockerfile: workers/Dockerfile
     depends_on:
       - redis
     volumes:
       - .:/app
+    environment:
+      - REDIS_HOST=redis
   redis:
     image: redis
+    ports:
+      - "6379:6379"
   storage1:
-    image: ubuntu
+    build: .
+    ports:
+      - "2000:22"
   storage2:
-    image: ubuntu
+    build: .
+    ports:
+      - "2001:22"

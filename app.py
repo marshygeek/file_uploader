@@ -1,9 +1,9 @@
 from aiohttp import web
-import redis
+import logging
 
 from routes import upload_file, get_files_list
 
-redis = redis.Redis(host='redis')
+logging.basicConfig(level=logging.INFO)
 
 app = web.Application()
 app.router.add_put('/upload', upload_file)
